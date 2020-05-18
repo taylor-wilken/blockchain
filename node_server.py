@@ -152,7 +152,7 @@ def new_transaction():
     f = open("IOT_data.txt", "r")
 
 
-    tx_data = {"content1":'%s'% f.readline(),"author":'%s'% f.readline()}
+    tx_data = {"content":'%s'% f.readline(),"author":'%s'% f.readline()}
     required_fields = ["author", "content"]
 
     for field in required_fields:
