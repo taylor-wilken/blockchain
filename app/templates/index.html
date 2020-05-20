@@ -6,33 +6,52 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     function timer() {
-        setInterval(function(){ ajaxcall() }, 10000);
+        setInterval(function () { ajaxcall() }, 10000);
     }
     function ajaxcall() {
         $.ajax({
             url: "http://127.0.0.1:5000/submit",
             type: "POST",
             data: "content=1&author=1"
-        });        
+        });
+    }
+
+    function condition() {
+        for (i = 1; i < document.getElementsByTagName("tr").length; i++) {
+            if (document.getElementsByTagName("tr")[i].cells[2].innerHTML == "Catastrophic ") {
+                document.getElementsByTagName("tr")[i].style.backgroundColor = "red"
+            }
+            else if (document.getElementsByTagName("tr")[i].cells[2].innerHTML == "Major Leakage") { document.getElementsByTagName("tr")[i].style.backgroundColor = "orange" }
+            else if (document.getElementsByTagName("tr")[i].cells[2].innerHTML == "Minor Leakage") { document.getElementsByTagName("tr")[i].style.backgroundColor = "yellow" }
+            else { document.getElementsByTagName("tr")[i].style.backgroundColor = "green" }
+        }
     }
 </script>
 <center>
-    <button onclick="timer()">Start</button>
-    <a href="{{node_address}}/mine" target="_blank"><button>Request to mine</button></a>
-    <a href="/"><button>Resync</button></a>
+
+    <button style="background-color:#ffd800" onclick="timer()">Start</button>
+    <a href="{{node_address}}/mine" target="_blank"><button style="background-color:#ffd800">Request to mine</button></a>
+    <a href="/"><button style="background-color:#ffd800">Resync</button></a>
+
+    <div style="padding: 10px 5px;">
+        <button style="background-color: red">Determines the leakage level is dangerous</button>
+        <button style="background-color: orange">Determines the leakage is considerable</button>
+        <button style="background-color: yellow">Determines the leakage is minimal</button>
+        <button style="background-color: green">Determines the normal flow in the pipeline</button>
+    </div>
 </center>
 
 <br>
 
 
 
-<table >
+<table>
 
-    <tr >
+    <tr>
         <th>Block ID</th>
         <th>Leakage Location</th>
 
-        <th>Leakage Severity</th>
+        <th onmouseover="condition()">Leakage Severity</th>
         <th>Timestamp</th>
 
     </tr>
@@ -41,11 +60,11 @@
 
 
     <tr>
-        <td  class="test"></td>
-        <td >{{post.content}}</td>
+        <td class="test"></td>
+        <td>{{post.content}}</td>
 
-        <td >{{post.author}}</td>
-        <td >{{post.timestamp}}</td>
+        <td>{{post.author}}</td>
+        <td>{{post.timestamp}}</td>
 
     </tr>
 
@@ -55,26 +74,56 @@
 </table>
 
 <style>
+    .selected {
+        background-color: green;
+    }
 
-    * {font-family: Helvetica Neue, Arial, sans-serif; }
+    .bad {
+        background-color: red;
+    }
 
-body { background-image: linear-gradient(#aaa 25%, #000);}
+    * {
+        font-family: Helvetica Neue, Arial, sans-serif;
+    }
 
-h1, table { text-align: center; }
+    body {
+        background-image: linear-gradient(#aaa 25%, #000);
+    }
 
-table {border-collapse: collapse;  width: 70%; margin: 0 auto 5rem;}
+    h1, table {
+        text-align: center;
+    }
 
-th, td { padding: 1.5rem; font-size: 1.3rem; }
+    table {
+        border-collapse: collapse;
+        width: 70%;
+        margin: 0 auto 5rem;
+    }
 
-tr {background: hsl(50, 50%, 80%); }
+    th, td {
+        padding: 1.5rem;
+        font-size: 1.3rem;
+    }
 
-tr, td { transition: .4s ease-in; } 
+    tr {
+        background: hsl(50, 50%, 80%);
+    }
 
-tr:first-child {background: hsla(12, 100%, 40%, 0.5); }
+    tr, td {
+        transition: .4s ease-in;
+    }
 
-tr:nth-child(even) { background: hsla(50, 50%, 80%, 0.7); }
+        tr:first-child {
+            background: hsla(12, 100%, 40%, 0.5);
+        }
 
-td:empty {background: hsla(50, 25%, 60%, 0.7); }
+        tr:nth-child(even) {
+            background: hsla(50, 50%, 80%, 0.7);
+        }
+
+        td:empty {
+            background: hsla(50, 25%, 60%, 0.7);
+        }
 
 
 
@@ -92,6 +141,5 @@ td:empty {background: hsla(50, 25%, 60%, 0.7); }
         counter-increment: my-sec-counter;
         content: "Block " counter(my-sec-counter) ". ";
     }
-    
 </style>
 {% endblock %}
