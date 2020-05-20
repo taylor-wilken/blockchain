@@ -22,13 +22,14 @@
 
 <table> 
 
-  <tr> 
-    <th>Block ID</th> 
-    <th>Data Input</th> 
+	<tr>
+		<th>Block ID</th>
+		<th>Data Input</th>
 
-    <th>Name</th> 
+		<th>Name</th>
+		<th>Timestamp</th>
 
-  </tr> 
+	</tr> 
     {% for post in posts %}
     <div >
 
@@ -38,6 +39,7 @@
     <td>{{post.content}}</td> 
 
     <td>{{post.author}}</td> 
+	<td>{{post.timestamp}}</td>
 
   </tr> 
 	   

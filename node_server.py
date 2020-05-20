@@ -1,6 +1,7 @@
 from hashlib import sha256
 import json
 import time
+from datetime import datetime
 
 from flask import Flask, request
 import requests
@@ -124,7 +125,7 @@ class Blockchain:
 
         new_block = Block(index=last_block.index + 1,
                           transactions=self.unconfirmed_transactions,
-                          timestamp=time.time(),
+                          timestamp=time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time())),
                           previous_hash=last_block.hash)
 
         proof = self.proof_of_work(new_block)
@@ -159,7 +160,7 @@ def new_transaction():
         if not tx_data.get(field):
             return "Invalid transaction data", 404
 
-    tx_data["timestamp"] = time.time()
+    tx_data["timestamp"] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
     blockchain.add_new_transaction(tx_data)
     f.close()
