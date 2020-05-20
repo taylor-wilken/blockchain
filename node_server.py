@@ -151,7 +151,7 @@ peers = set()
 @app.route('/new_transaction', methods=['POST'])
 def new_transaction():
     f = open("IOT_data.txt", "r")
-
+    
 
     tx_data = {"content":'%s'% f.readline(),"author":'%s'% f.readline()}
     required_fields = ["author", "content"]
@@ -162,7 +162,7 @@ def new_transaction():
 
     tx_data["timestamp"] = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
-    blockchain.add_new_transaction(tx_data)
+    blockchain.add_new_transaction(tx_data)      
     f.close()
     return "Success", 201
 

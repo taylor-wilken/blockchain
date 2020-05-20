@@ -5,8 +5,8 @@
 <br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function timer1() {
-        setInterval(ajaxcall(), 10000);
+    function timer() {
+        setInterval(function(){ ajaxcall() }, 10000);
     }
     function ajaxcall() {
         $.ajax({
@@ -15,28 +15,24 @@
             data: "content=1&author=1"
         });        
     }
-    
-
-
 </script>
 <center>
-    <button onclick="timer1()">Start</button>
+    <button onclick="timer()">Start</button>
+    <a href="{{node_address}}/mine" target="_blank"><button>Request to mine</button></a>
+    <a href="/"><button>Resync</button></a>
 </center>
-
-	</center>
 
 <br>
 
-<a href="{{node_address}}/mine" target="_blank"><button>Request to mine</button></a>
-<a href="/"><button>Resync</button></a>
+
 
 <table width="100%" border="0">
 
     <tr>
         <th>Block ID</th>
-        <th>Data Input</th>
+        <th>Leakage Location</th>
 
-        <th>Name</th>
+        <th>Leakage Severity</th>
         <th>Timestamp</th>
 
     </tr>
@@ -70,12 +66,16 @@
     body {
         /* Set "my-sec-counter" to 0 */
         counter-reset: my-sec-counter;
+        background-image: url("https://d27p8o2qkwv41j.cloudfront.net/wp-content/uploads/2016/03/dreamstime_m_48008311-e1458641725575.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
     .test::before {
         /* Increment "my-sec-counter" by 1 */
         counter-increment: my-sec-counter;
         content: "Block " counter(my-sec-counter) ". ";
+
     }
 
     .post_box-header {
@@ -131,7 +131,6 @@
         outline: none;
         height: 42px;
     }
-
+    
 </style>
-    </div>
 {% endblock %}
