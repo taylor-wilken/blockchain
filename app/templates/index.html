@@ -20,7 +20,7 @@
 	<a href="{{node_address}}/mine" target="_blank"><button>Request to mine</button></a>
 	<a href="/"><button>Resync</button></a>
 
-<table> 
+<table width="100%" border="0"> 
 
 	<tr>
 		<th>Block ID</th>
@@ -31,22 +31,23 @@
 
 	</tr> 
     {% for post in posts %}
-    <div >
+
 
 
   <tr> 
-    <td class="test"></td> 
-    <td>{{post.content}}</td> 
+    <td style="text-align:center" class="test"></td> 
+    <td style="text-align:center" >{{post.content}}</td> 
 
-    <td>{{post.author}}</td> 
-	<td>{{post.timestamp}}</td>
+    <td style="text-align:center" >{{post.author}}</td> 
+	<td style="text-align:center" >{{post.timestamp}}</td>
 
   </tr> 
 	   
 	
-	</div>
+
 	{% endfor %}
 </table> 
+
 	<style>
 		.post_box {
 		    background: #fff;
