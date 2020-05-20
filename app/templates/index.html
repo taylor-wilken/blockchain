@@ -2,122 +2,136 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<br>
+<br>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function timer1() {
+        setInterval(ajaxcall(), 10000);
+    }
+    function ajaxcall() {
+        $.ajax({
+            url: "http://127.0.0.1:5000/submit",
+            type: "POST",
+            data: "content=1&author=1"
+        });        
+    }
+    
 
-	<center>
-	<form action="/submit" id="textform" method="post">
-	    <textarea name="content" rows="4" cols="50" placeholder="Just write whatever you want to..."></textarea>
-	    <br>
-	    <input type="text" name="author" placeholder="Your name">
-	    <input type="submit" value="Post">
-	</form>
+
+</script>
+<center>
+    <button onclick="timer1()">Start</button>
+</center>
+
 	</center>
 
-	</center>
+<br>
 
-	<br>
+<a href="{{node_address}}/mine" target="_blank"><button>Request to mine</button></a>
+<a href="/"><button>Resync</button></a>
 
-	<a href="{{node_address}}/mine" target="_blank"><button>Request to mine</button></a>
-	<a href="/"><button>Resync</button></a>
+<table width="100%" border="0">
 
-<table width="100%" border="0"> 
+    <tr>
+        <th>Block ID</th>
+        <th>Data Input</th>
 
-	<tr>
-		<th>Block ID</th>
-		<th>Data Input</th>
+        <th>Name</th>
+        <th>Timestamp</th>
 
-		<th>Name</th>
-		<th>Timestamp</th>
-
-	</tr> 
+    </tr>
     {% for post in posts %}
 
 
 
-  <tr> 
-    <td style="text-align:center" class="test"></td> 
-    <td style="text-align:center" >{{post.content}}</td> 
+    <tr>
+        <td style="text-align:center" class="test"></td>
+        <td style="text-align:center">{{post.content}}</td>
 
-    <td style="text-align:center" >{{post.author}}</td> 
-	<td style="text-align:center" >{{post.timestamp}}</td>
+        <td style="text-align:center">{{post.author}}</td>
+        <td style="text-align:center">{{post.timestamp}}</td>
 
-  </tr> 
-	   
-	
+    </tr>
 
-	{% endfor %}
-</table> 
 
-	<style>
-		.post_box {
-		    background: #fff;
-		    padding: 12px 0px 0px 12px;
-		    margin-top: 0px;
-		    margin-bottom: 8px;
-		    border-top: 1px solid #f0f0f0;
-		}
-body {
-  /* Set "my-sec-counter" to 0 */
-  counter-reset: my-sec-counter;
-}
 
-.test::before {
-  /* Increment "my-sec-counter" by 1 */
-  counter-increment: my-sec-counter;
-  content: "Block " counter(my-sec-counter) ". ";
-}
-		.post_box-header {
-		    padding-bottom: 12px;
-		}
+    {% endfor %}
+</table>
 
-		.post_box-avatar {
-		    width: 38px;
-		    height: 38px;
-		    border-radius: 50%;
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-		    color: white;
-		    font-size: 22px;
-		    float: left;
-		    margin-right: 16px;
-		    border: 1px solid #fff;
-		    box-shadow: 0px 0px 0px 2px #f00;
-		}
+<style>
+    .post_box {
+        background: #fff;
+        padding: 12px 0px 0px 12px;
+        margin-top: 0px;
+        margin-bottom: 8px;
+        border-top: 1px solid #f0f0f0;
+    }
 
-		.post_box-avatar::after {
-		    content:"";
-		    display:block;
-		}
+    body {
+        /* Set "my-sec-counter" to 0 */
+        counter-reset: my-sec-counter;
+    }
 
-		.post_box-name {
-		    font-weight: bold;
-		}
+    .test::before {
+        /* Increment "my-sec-counter" by 1 */
+        counter-increment: my-sec-counter;
+        content: "Block " counter(my-sec-counter) ". ";
+    }
 
-		.post_box-subtitle {
-		    color: #777;
-		}
+    .post_box-header {
+        padding-bottom: 12px;
+    }
 
-		.post_box-body {
-		    margin-top: 16px;
-		    margin-bottom: 8px;
-		}
+    .post_box-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 22px;
+        float: left;
+        margin-right: 16px;
+        border: 1px solid #fff;
+        box-shadow: 0px 0px 0px 2px #f00;
+    }
 
-		.post_box-options {
-		    float: right;
-		}
-		.option-btn {
-		    background: #f8f8f8;
-		    border: none;
-		    color: #2c3e50;
-		    padding: 7px;
-		    cursor: pointer;
-		    font-size: 14px;
-		    margin-left: 2px;
-		    margin-right: 2px;
-		    outline: none;
-		    height: 42px;
-		}
-	</style>
+        .post_box-avatar::after {
+            content: "";
+            display: block;
+        }
+
+    .post_box-name {
+        font-weight: bold;
+    }
+
+    .post_box-subtitle {
+        color: #777;
+    }
+
+    .post_box-body {
+        margin-top: 16px;
+        margin-bottom: 8px;
+    }
+
+    .post_box-options {
+        float: right;
+    }
+
+    .option-btn {
+        background: #f8f8f8;
+        border: none;
+        color: #2c3e50;
+        padding: 7px;
+        cursor: pointer;
+        font-size: 14px;
+        margin-left: 2px;
+        margin-right: 2px;
+        outline: none;
+        height: 42px;
+    }
+
+</style>
     </div>
 {% endblock %}
