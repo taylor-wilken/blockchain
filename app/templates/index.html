@@ -5,6 +5,7 @@
 <br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
     function timer() {
         setInterval(function () { ajaxcall() }, 10000);
     }
@@ -12,32 +13,35 @@
         $.ajax({
             url: "http://127.0.0.1:5000/submit",
             type: "POST",
-            data: "content=1&author=1"
+            data: "content=1&author=1",
+            success: setTimeout(function () {
+                location = 'http://127.0.0.1:5000/'
+            }, 3000)
         });
     }
 
     function condition() {
         for (i = 1; i < document.getElementsByTagName("tr").length; i++) {
             if (document.getElementsByTagName("tr")[i].cells[2].innerHTML == "Catastrophic ") {
-                document.getElementsByTagName("tr")[i].style.backgroundColor = "red"
+                document.getElementsByTagName("tr")[i].style.backgroundColor = "orangered"
             }
-            else if (document.getElementsByTagName("tr")[i].cells[2].innerHTML == "Major Leakage") { document.getElementsByTagName("tr")[i].style.backgroundColor = "orange" }
-            else if (document.getElementsByTagName("tr")[i].cells[2].innerHTML == "Minor Leakage") { document.getElementsByTagName("tr")[i].style.backgroundColor = "yellow" }
-            else { document.getElementsByTagName("tr")[i].style.backgroundColor = "green" }
+            else if (document.getElementsByTagName("tr")[i].cells[2].innerHTML == "Major Leakage") { document.getElementsByTagName("tr")[i].style.backgroundColor = "darkorange" }
+            else if (document.getElementsByTagName("tr")[i].cells[2].innerHTML == "Minor Leakage") { document.getElementsByTagName("tr")[i].style.backgroundColor = "lightcoral" }
+            else { document.getElementsByTagName("tr")[i].style.backgroundColor = "lightgreen" }
         }
     }
 </script>
 <center>
 
-    <button style="background-color:#ffd800" onclick="timer()">Start</button>
+
     <a href="{{node_address}}/mine" target="_blank"><button style="background-color:#ffd800">Request to mine</button></a>
     <a href="/"><button style="background-color:#ffd800">Resync</button></a>
 
     <div style="padding: 10px 5px;">
-        <button style="background-color: red">Determines the leakage level is dangerous</button>
-        <button style="background-color: orange">Determines the leakage is considerable</button>
-        <button style="background-color: yellow">Determines the leakage is minimal</button>
-        <button style="background-color: green">Determines the normal flow in the pipeline</button>
+        <button style="background-color: orangered">Determines the leakage level is dangerous</button>
+        <button style="background-color: darkorange">Determines the leakage is considerable</button>
+        <button style="background-color: lightcoral">Determines the leakage is minimal</button>
+        <button style="background-color: lightgreen">Determines the normal flow in the pipeline</button>
     </div>
 </center>
 
@@ -51,7 +55,7 @@
         <th>Block ID</th>
         <th>Leakage Location</th>
 
-        <th onmouseover="condition()">Leakage Severity</th>
+        <th >Leakage Severity</th>
         <th>Timestamp</th>
 
     </tr>
